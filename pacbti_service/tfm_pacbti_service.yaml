@@ -1,0 +1,31 @@
+{
+  "psa_framework_version": 1.1,
+  "name": "TFM_SP_PACBTI_SERVICE",
+  "type": "APPLICATION-ROT",
+  "priority": "HIGH",
+  "model": "IPC",
+ #"entry_init": "tfm_pacbti_init",
+  "entry_point": "tfm_pacbti_entry",
+  "stack_size": "0x0200",
+  "services": [
+   {
+     "name": "TFM_PACBTI_SERVICE",
+     "sid": "0x000004bc", # VER
+     "non_secure_clients": false,
+     "connection_based": false,
+     #"stateless_handle": "auto", # ver
+     "version": 1,
+     "version_policy": "STRICT",
+   }
+ ],
+  "irqs": [
+    {
+      "source": GPIO0_9_IRQ,
+      "name": "RUNPBAFAULT",
+      "handling": "SLIH"
+    }
+  ],
+  "dependencies": [
+      "TFM_INTERNAL_TRUSTED_STORAGE_SERVICE",
+  ]
+}

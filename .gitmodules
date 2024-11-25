@@ -1,0 +1,3 @@
+[submodule "trusted-firmware-m-runpba"]
+	path = trusted-firmware-m-runpba
+	url = https://github.com/MrSuicideParrot/trusted-firmware-m-runpba.git

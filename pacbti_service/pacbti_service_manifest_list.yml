@@ -1,0 +1,22 @@
+{
+  "description": "Pacbti Service secure partition",
+  "type": "manifest_list",
+  "version_major": 0,
+  "version_minor": 1,
+  "manifest_list": [
+    {
+      "description": "TFM Pacbti Service Partition",
+      "manifest": "tfm_pacbti_service.yaml",
+      "output_path": "secure_fw/partitions/pacbti_service",
+      "conditional": "TFM_PARTITION_PACBTI_SERVICE",
+      "version_major": 0,
+      "version_minor": 1,
+      "pid": 278,
+      "linker_pattern": {
+        "library_list": [
+          "*tfm_*partition_pacbti_service*"
+        ]
+      }
+    }
+  ]
+}
