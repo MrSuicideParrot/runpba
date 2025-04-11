@@ -46,6 +46,43 @@ void printf_processing(int size) {
     printf("Feito\r\n");
 }
 
+int static_message_size() {
+    return 8;
+}
+
+int static_message2_size() {
+    return 150;
+}
+
+int hex_message_size() {
+    uint8_t message[21];
+    stdio_input_string(message, 4);
+    return (int)strtol(message, NULL, 16);
+}
+
+void custom_message_size(int type) {
+     int (*p[3]) ();
+    p[0] = static_message_size;
+    p[1] = hex_message_size;
+    p[2] = static_message2_size;
+
+    while(1) {
+        int size = p[type]();
+        
+        int message_length = size;
+        int array_length = size;
+        
+        if (array_length > 40) {
+            array_length = 40;
+        }
+
+        char buffer[array_length];
+        int result = stdio_input_string(buffer, message_length);
+        buffer[message_length] = '\0';
+        printf("Message received  %d !\r\nProcessing\r\n", result);
+    }
+}
+
 /**
  * \brief Services test thread
  *
@@ -106,7 +143,10 @@ while (1)
         //printf_processing(header[1]);
         echo_processing(header[1]);
         break;
-    
+
+    case 2:
+        custom_message_size(header[1]);
+        break;    
     default:
         LOG_MSG("Unknown %d\r\n", header[0]);
         break;
